@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="LostAndFound" value="2eacd4f2-7aa2-498c-8a15-7c3c31e03571" />
+          <factory-entry name="entityManagerFactory" value="2eacd4f2-7aa2-498c-8a15-7c3c31e03571" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
+</module>
