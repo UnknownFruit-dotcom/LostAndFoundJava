@@ -1,0 +1,35 @@
+form {
+    width: 250px;
+    max-width: 300px;
+    align-self: center;
+}
+
+form input {
+    font-size: 18px;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+form button, a {
+    background-color: #6b6375;
+    color: white;
+    padding: 8px 24px;
+
+    font-weight: 400;
+    font-family: 'Segoe UI';
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-block
+}
+
+.controls button:hover {
+    background-color: color-mix(in oklab, #6b6375, #000 20%);
+}
+
