@@ -7,20 +7,25 @@ function Login() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
+    const [loading, setLoading] = useState(false);
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
             const data = await authService.login(login, password);
             toast.success("Вход успешен");
         } catch (error) {
-            const errorDetail = error.response?.data?.detail || "Ошибка входа";
+            const errorDetail = error.response?.data?.detail || "Вход не удался";
             toast.error(errorDetail);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <>
-            <form id="center" onSubmit={handleLogin}>
+            <form className="loginForm" onSubmit={handleLogin}>
                 <h2>Вход</h2>
                 <input
                     type="text"
@@ -40,7 +45,11 @@ function Login() {
                     <a href="/" className="backBtn">Назад</a>
                     <button type="submit" className="loginBtn">Войти</button>
                 </div>
+                {loading && (
+                    <div className="loading">Загрузка...</div>
+                )}
             </form>
+            
             <ToastContainer /> 
         </>
     )

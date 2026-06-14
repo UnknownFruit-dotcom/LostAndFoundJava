@@ -7,7 +7,6 @@ import './App.css'
 function App() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     
     useEffect(() => {
         const loadItems = async () => {
@@ -15,9 +14,8 @@ function App() {
                 setLoading(true);
                 const data = await itemService.getAllItems();
                 setItems(data);
-                setError(null);
             } catch (err) {
-                setError("Не удалось загрузить данные");
+                toast.error("Не удалось загрузить данные");
                 console.error(err);
             } finally {
                 setLoading(false);
@@ -38,29 +36,30 @@ function App() {
         }
     };
 
-    if (loading) return <div>Загрузка...</div>;
-    if (error) return <div>Ошибка: {error}</div>;
   return (
       <>
       <section id="center">
-            <div className="itemsList">
-                    {items.map(item => (
-                        <div className="itemCard" id={item.id}>
-                            <div className="itemInfo">
-                                <p>{item.title}</p>
-                                <p>Нашедший: {item.foundBy.login}</p>
-                            </div>
-                            {item.isOwner && (
-                                <button className="itemDeleteBtn" onClick={() => handleDeleteItem(item.id)}>
-                                    Удалить
-                                </button>
-                            )}
-                        </div>
-                    ))}
+              <div className="itemsList">
+                  {loading && (
+                      <div className="loading">Загрузка...</div>
+                  )}
+                  {items.map(item => (
+                      <div className="itemCard" id={item.id}>
+                          <div className="itemInfo">
+                              <p>{item.title}</p>
+                              <p>Нашедший: {item.foundBy.login}</p>
+                          </div>
+                          {item.isOwner && (
+                              <button className="itemDeleteBtn" onClick={() => handleDeleteItem(item.id)}>
+                                  Удалить
+                              </button>
+                          )}
+                      </div>
+                  ))}
             </div>
       </section>
 
-        <Link to="/auth/login" className="toLogin">Войдите, чтобы размещать вещи</Link>
+        <Link to="/login" className="toLogin">Войдите, чтобы размещать вещи</Link>
         <ToastContainer />
     </>
   )
