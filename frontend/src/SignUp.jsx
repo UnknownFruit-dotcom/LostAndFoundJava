@@ -6,31 +6,28 @@ import { toast } from "react-toastify";
 import Navbar from './Navbar';
 import './Auth.css'
 
-function Login() {
+function SignUp() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
     const [loading, setLoading] = useState(false);
 
     const { login: setUser } = useAuth();
-
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
 
-            await authService.login(login, password);
-
-            const userData = await authService.getCurrentUser();
+            const userData = await authService.signUp(login, password);
             setUser(userData);
 
-            toast.success("Вход выполнен успешно");
+            toast.success("Регистрация успешна. Добро пожаловать");
 
             navigate("/");
         } catch (error) {
-            const errorDetail = error.response?.data?.detail || "Вход не удался";
+            const errorDetail = error.response?.data?.detail || "Регистрация не удалась";
             toast.error(errorDetail);
         } finally {
             setLoading(false);
@@ -40,8 +37,8 @@ function Login() {
     return (
         <>
             <Navbar />
-            <form className="loginForm" onSubmit={handleLogin}>
-                <h2>Вход</h2>
+            <form className="signupForm" onSubmit={handleSignUp}>
+                <h2>Создайте аккаунт</h2>
                 <input
                     type="text"
                     placeholder="Name"
@@ -58,7 +55,7 @@ function Login() {
                 />
                 <div className="controls">
                     <a href="/" className="backBtn">Назад</a>
-                    <button type="submit" className="loginBtn">Войти</button>
+                    <button type="submit" className="signupBtn">Создать</button>
                 </div>
                 {loading && (
                     <div className="loading">Загрузка...</div>
@@ -68,4 +65,4 @@ function Login() {
     )
 }
 
-export default Login
+export default SignUp

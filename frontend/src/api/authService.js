@@ -17,5 +17,13 @@ export const authService = {
     getCurrentUser: async () => {
         const response = await myAxios.get('/api/auth/me');
         return response.data;
+    },
+
+    signUp: async (login, password) => {
+        const response = await myAxios.post('/api/auth/register', {
+            login: login,
+            password: password
+        });
+        return response.data;
     }
 };

@@ -48,6 +48,11 @@ const Navbar = () => {
                     Главная
                 </Link>
             </div>
+            <div className="navbar-right">
+                <Link to="/signup" className="signup">
+                    Регистрация
+                </Link>
+            </div>
         </nav>
     );
 };

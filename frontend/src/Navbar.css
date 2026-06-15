@@ -7,14 +7,14 @@
     padding: 6px 18px;
 }
 
-.navbar-left {
+.navbar-left, .navbar-right {
     display: flex;
     gap: 12px;
     align-items: center;
     font-size: 22px;
 }
 
-.navbar-left a, .navbar-left button {
+.navbar a, .navbar button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@
     font-size: inherit;
     padding: 6px 10px;
     color: #fff;
-    width: 120px;
+    width: fit-content;
 
     border: none;
     cursor: pointer;
@@ -37,7 +37,11 @@
     transition: ease-in-out 200ms;
 }
 
-.navbar-left a:hover, .navbar-left button:hover {
+.navbar-left a {
+    width: 100px;
+}
+
+.navbar a:hover, .navbar button:hover {
     background-color: color-mix(in oklab, #6b6375, #000 20%);
 }
 

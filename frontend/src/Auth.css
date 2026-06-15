@@ -1,4 +1,4 @@
-.loginForm {
+.loginForm, .signupForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.loginForm input {
+.loginForm input, .signupForm input {
     font-size: 18px;
 }
 
@@ -39,7 +39,7 @@ form button, a {
     display: inline-block
 }
 
-.controls button:hover {
+.controls button:hover, .controls a:hover {
     background-color: color-mix(in oklab, #6b6375, #000 20%);
 }
 
