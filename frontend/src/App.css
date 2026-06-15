@@ -182,7 +182,7 @@
   }
 }
 
-.toLogin, .itemDeleteBtn {
+.itemDeleteBtn {
     background-color: #6b6375;
     color: white;
     padding: 8px 24px;
@@ -194,10 +194,12 @@
     text-decoration: none;
     border: none;
     border-radius: 5px;
-    display: inline-block
+    display: inline-block;
+
+    transition: ease-in-out 200ms;
 }
 
-.toLogin:hover, .itemDeleteBtn:hover {
+.itemDeleteBtn:hover {
     background-color: color-mix(in oklab, #6b6375, #000 20%);
 }
 

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authService } from './api/authService';
-import { ToastContainer, toast } from "react-toastify";
+import { useAuth } from './context/AuthContext';
+import { toast } from "react-toastify";
 import Navbar from './Navbar';
 import './Login.css'
 
@@ -10,12 +12,23 @@ function Login() {
 
     const [loading, setLoading] = useState(false);
 
+    const { login: setUser } = useAuth();
+
+    const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
-            const data = await authService.login(login, password);
-            toast.success("Вход успешен");
+
+            await authService.login(login, password);
+
+            const userData = await authService.getCurrentUser();
+            setUser(userData);
+
+            toast.success("Вход выполнен успешно");
+
+            navigate("/");
         } catch (error) {
             const errorDetail = error.response?.data?.detail || "Вход не удался";
             toast.error(errorDetail);
@@ -51,8 +64,6 @@ function Login() {
                     <div className="loading">Загрузка...</div>
                 )}
             </form>
-            
-            <ToastContainer /> 
         </>
     )
 }

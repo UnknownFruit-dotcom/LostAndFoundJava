@@ -11,18 +11,34 @@
     display: flex;
     gap: 12px;
     align-items: center;
+    font-size: 22px;
 }
 
-.navbar-left .main {
-    font-size: 22px;
+.navbar-left a, .navbar-left button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    background-color: #6b6375;
+    font-size: inherit;
     padding: 6px 10px;
     color: #fff;
-    text-decoration: none;
+    width: 120px;
+
+    border: none;
+    cursor: pointer;
     align-items: center;
+
+    font-family: "Segoe UI";
+    border-radius: 5px;
+
+    line-height: 1;
+    transition: ease-in-out 200ms;
 }
 
-.navbar-left a {
-    min-width: 80px;
+.navbar-left a:hover, .navbar-left button:hover {
+    background-color: color-mix(in oklab, #6b6375, #000 20%);
 }
 
 .avatarContainer {
@@ -30,6 +46,11 @@
     height: 70px;
     border-radius: 35px;
     overflow: hidden;
+
+    cursor: pointer;
+}
+
+.greeting {
     margin-right: 8px;
 }
 

@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { itemService } from './api/itemService';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Navbar from './Navbar';
 import './App.css'
 
@@ -60,9 +59,6 @@ function App() {
                   ))}
             </div>
       </section>
-
-        <Link to="/login" className="toLogin">Войдите, чтобы размещать вещи</Link>
-        <ToastContainer />
     </>
   )
 }

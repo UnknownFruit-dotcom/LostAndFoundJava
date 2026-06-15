@@ -7,5 +7,15 @@ export const authService = {
             password: password
         });
         return response.data;
+    },
+
+    logout: async () => {
+        const response = await myAxios.post("/api/auth/logout", {});
+        return response.data;
+    },
+
+    getCurrentUser: async () => {
+        const response = await myAxios.get('/api/auth/me');
+        return response.data;
     }
 };
