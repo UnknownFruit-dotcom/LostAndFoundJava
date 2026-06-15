@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { authService } from './api/authService';
 import { ToastContainer, toast } from "react-toastify";
+import Navbar from './Navbar';
 import './Login.css'
 
 function Login() {
@@ -25,6 +26,7 @@ function Login() {
 
     return (
         <>
+            <Navbar />
             <form className="loginForm" onSubmit={handleLogin}>
                 <h2>Вход</h2>
                 <input

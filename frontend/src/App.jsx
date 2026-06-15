@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { itemService } from './api/itemService';
 import { ToastContainer, toast } from 'react-toastify';
+import Navbar from './Navbar';
 import './App.css'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
   return (
       <>
+      <Navbar />
       <section id="center">
               <div className="itemsList">
                   {loading && (

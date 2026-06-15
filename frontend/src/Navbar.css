@@ -1,0 +1,39 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 6px 18px;
+}
+
+.navbar-left {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.navbar-left .main {
+    font-size: 22px;
+    padding: 6px 10px;
+    color: #fff;
+    text-decoration: none;
+    align-items: center;
+}
+
+.navbar-left a {
+    min-width: 80px;
+}
+
+.avatarContainer {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.avatarContainer img {
+    width: 100%;
+    object-fit: cover;
+}
