@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { itemService } from './api/itemService';
 import { toast } from 'react-toastify';
 import Navbar from './Navbar';
@@ -7,23 +7,25 @@ import './App.css'
 function App() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-        const loadItems = async () => {
-            try {
-                setLoading(true);
-                const data = await itemService.getAllItems();
-                setItems(data);
-            } catch (err) {
-                toast.error("Не удалось загрузить данные");
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const [search, setSearch] = useState('');
+    const [status, setStatus] = useState(true);
 
+    const loadItems = useCallback(async () => {
+        try {
+            setLoading(true);
+            const data = await itemService.searchItems(search, status);
+            setItems(data);
+        } catch (err) {
+            toast.error("Не удалось загрузить данные");
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    }, [search, status]);
+
+    useEffect(() => {
         loadItems();
-    }, []);
+    }, [loadItems]);
 
     const handleDeleteItem = async (id) => {
         try {
@@ -39,7 +41,16 @@ function App() {
   return (
       <>
       <Navbar />
-      <section id="center">
+          <section id="center">
+              <div className="searchBar">
+                  <input
+                      type="text"
+                      placeholder="Поиск по названию, описанию..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                  />
+              </div>
+
               <div className="itemsList">
                   {loading && (
                       <div className="loading">Загрузка...</div>

@@ -6,6 +6,11 @@ export const itemService = {
         return response.data;
     },
 
+    searchItems: async (search, status) => {
+        const response = await myAxios.get(`/api/items?search=${search}&status=${status}`);
+        return response.data;
+    },
+
     deleteItem: async(id) => {
         const response = await myAxios.delete(`/api/items/${id}`);
         return response.data;
