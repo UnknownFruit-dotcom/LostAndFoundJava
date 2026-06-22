@@ -232,10 +232,11 @@
     min-width: 500px;
 }
 
-.itemInfo  {
+.itemInfo {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
 }
 
 .itemCardFooter {
