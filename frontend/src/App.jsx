@@ -47,8 +47,9 @@ function App() {
                   {items.map(item => (
                       <div className="itemCard" id={item.id}>
                           <div className="itemInfo">
-                              <p>{item.title}</p>
-                              <p>Нашедший: {item.foundBy.login}</p>
+                              <h2>{item.title}</h2>
+                              <p className="itemDescription">{item.description}</p>
+                              <p>Нашедший: {item.foundBy.login} <span>({new Date(item.foundAt).toLocaleString()})</span></p>
                           </div>
                           {item.isOwner && (
                               <button className="itemDeleteBtn" onClick={() => handleDeleteItem(item.id)}>
