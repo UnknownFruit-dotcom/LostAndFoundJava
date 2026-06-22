@@ -43,8 +43,10 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<ItemResponse> createItem(@RequestBody ItemRequest item) {
-        return ResponseEntity.ok(itemService.createItem(item));
+    public ResponseEntity<ItemResponse> createItem(
+            @RequestBody ItemRequest request,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+        return ResponseEntity.ok(itemService.createItem(request, currentUser.getId()));
     }
 
     @DeleteMapping("/{itemId}")

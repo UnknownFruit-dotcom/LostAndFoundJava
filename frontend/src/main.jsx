@@ -7,6 +7,7 @@ import './index.css'
 import App from './App'
 import Login from "./Login";
 import SignUp from './SignUp';
+import AddItem from './AddItem';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/signup",
         element: <SignUp />
+    },
+    {
+        path: "/add-item",
+        element: <AddItem />
     }
 ])
 

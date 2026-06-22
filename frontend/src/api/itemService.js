@@ -2,21 +2,22 @@ import { myAxios } from "./axios";
 
 export const itemService = {
     getAllItems: async () => {
-        try {
-            const response = await myAxios.get("/api/items");
-            return response.data;
-        } catch (error) {
-            console.error("Error fetching items:", error);
-            throw error;
-        }
+        const response = await myAxios.get("/api/items");
+        return response.data;
     },
+
     deleteItem: async(id) => {
-        try {
-            const response = await myAxios.delete(`/api/items/${id}`);
-            return response.data;
-        } catch (error) {
-            console.error(`error deleting item ${id}:`, error);
-            throw error;
-        }
+        const response = await myAxios.delete(`/api/items/${id}`);
+        return response.data;
     },
+
+    addItem: async (title, description, foundAt, foundBy) => {
+        const response = await myAxios.post(`/api/items`, {
+            title: title,
+            description: description,
+            foundAt: foundAt,
+            foundBy: foundBy
+        });
+        return response.data;
+    }
 };

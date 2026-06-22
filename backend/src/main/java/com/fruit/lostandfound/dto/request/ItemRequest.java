@@ -5,6 +5,5 @@ import java.time.LocalDateTime;
 public record ItemRequest(
         String title,
         String description,
-        LocalDateTime foundAt,
-        Long foundByUserId
+        LocalDateTime foundAt
 ) {}

@@ -24,7 +24,7 @@
     font-size: inherit;
     padding: 6px 10px;
     color: #fff;
-    width: fit-content;
+    min-width: fit-content;
 
     border: none;
     cursor: pointer;
@@ -46,6 +46,7 @@
 }
 
 .avatarContainer {
+    min-width: 70px;
     width: 70px;
     height: 70px;
     border-radius: 35px;

@@ -47,6 +47,9 @@ const Navbar = () => {
                 <Link to="/" className="main">
                     Главная
                 </Link>
+                <Link to="/add-item" className="placeItem">
+                    Разместить вещь
+                </Link>
             </div>
             <div className="navbar-right">
                 <Link to="/signup" className="signup">

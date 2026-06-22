@@ -114,11 +114,11 @@ public class ItemService {
     }
 
     @Transactional
-    public ItemResponse createItem(ItemRequest request) {
+    public ItemResponse createItem(ItemRequest request, Long userId) {
         Item item = itemMapper.toEntity(request);
 
-        User user = userRepository.findById(request.foundByUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + request.foundByUserId()));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id:" + userId));
         item.setFoundBy(user);
 
         item.setCreatedAt(LocalDateTime.now());
