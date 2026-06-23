@@ -21,9 +21,11 @@ function SignUp() {
             setLoading(true);
 
             const userData = await authService.signUp(login, password);
+            await authService.login(login, password);
+
             setUser(userData);
 
-            toast.success("Регистрация успешна. Добро пожаловать");
+            toast.success("Регистрация успешна.");
 
             navigate("/");
         } catch (error) {
