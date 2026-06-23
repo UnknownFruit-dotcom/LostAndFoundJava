@@ -6,8 +6,13 @@ export const itemService = {
         return response.data;
     },
 
-    searchItems: async (search, status) => {
-        const response = await myAxios.get(`/api/items?search=${search}&status=${status}`);
+    searchItems: async (search = '', status = null) => {
+        const params = {};
+
+        if (search?.trim()) params.search = search.trim();
+        if (status !== null && status !== undefined) params.status = status;
+
+        const response = await myAxios.get('/api/items', { params });
         return response.data;
     },
 

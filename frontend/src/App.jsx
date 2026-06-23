@@ -8,12 +8,22 @@ function App() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
-    const [status, setStatus] = useState(true);
+    const [statusFilter, setStatusFilter] = useState(null);
+
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(search);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [search]);
 
     const loadItems = useCallback(async () => {
         try {
             setLoading(true);
-            const data = await itemService.searchItems(search, status);
+            const data = await itemService.searchItems(debouncedSearch, statusFilter);
             setItems(data);
         } catch (err) {
             toast.error("Не удалось загрузить данные");
@@ -21,7 +31,7 @@ function App() {
         } finally {
             setLoading(false);
         }
-    }, [search, status]);
+    }, [debouncedSearch, statusFilter]);
 
     useEffect(() => {
         loadItems();
@@ -49,6 +59,16 @@ function App() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                   />
+
+                  <select
+                      value={statusFilter === null ? "all" : statusFilter}
+                      onChange={(e) => setStatusFilter(e.target.value === "all" ? null : e.target.value)}
+                      className="statusFilter"
+                  >
+                      <option value="all">Все вещи</option>
+                      <option value="true">Активные</option>
+                      <option value="false">Неактивные</option>
+                  </select>
               </div>
 
               <div className="itemsList">

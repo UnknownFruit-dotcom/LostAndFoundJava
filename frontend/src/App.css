@@ -249,14 +249,25 @@
     padding: 12px 24px;
     border-radius: 0 0 12px 0;
     background-color: #333;
-    width: 370px;
+    width: 450px;
+    display: flex;
+    gap: 20px;
 }
 
-.searchBar input {
+.searchBar input, .searchBar select {
     font-size: 18px;
     padding: 2px 6px;
     background-color: white;
     border: 2px solid #6b6375;
     border-radius: 5px;
-    width: 90%;
+}
+
+.searchBar input {
+    width: 70%;
+    outline: none;
+}
+
+.searchBar select {
+    color: #757575;
+    width: 35%;
 }
