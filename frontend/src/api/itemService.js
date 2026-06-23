@@ -20,6 +20,11 @@ export const itemService = {
         const response = await myAxios.delete(`/api/items/${id}`);
         return response.data;
     },
+    
+    toggleItemStatus: async (id) => {
+        const response = await myAxios.patch(`/api/items/${id}/toggle`);
+        return response.data;
+    },
 
     addItem: async (title, description, foundAt, foundBy) => {
         const response = await myAxios.post(`/api/items`, {

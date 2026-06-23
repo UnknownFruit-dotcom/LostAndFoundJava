@@ -182,17 +182,22 @@
   }
 }
 
-.itemDeleteBtn {
+.itemCard .controls {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.itemCard .controls button {
     background-color: #6b6375;
     color: white;
     padding: 8px 24px;
 
-    align-self: start;
-    margin-left: auto;
-
+    min-width: 110px;
     font-weight: 400;
     font-family: 'Segoe UI';
     font-size: 18px;
+    white-space: nowrap;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -209,7 +214,7 @@
     border-radius: 12px;
 }
 
-.itemDeleteBtn:hover {
+.itemCard .controls button:hover {
     background-color: color-mix(in oklab, #6b6375, #000 20%);
 }
 

@@ -48,6 +48,22 @@ function App() {
         }
     };
 
+    const handleToggleItemStatus = async (id) => {
+        try {
+            await itemService.toggleItemStatus(id);
+            if (statusFilter === null) {
+                setItems(items.map(item =>
+                    item.id === id ? { ...item, isActive: !item.isActive } : item
+                ));
+            } else setTimeout(() => loadItems(), 300);
+
+            toast.success("Статус изменен");
+        } catch (err) {
+            console.error("Toggle error:", err);
+            toast.error(err.response?.data?.detail || "Ошибка переключения статуса");
+        }
+    };
+
   return (
       <>
       <Navbar />
@@ -78,14 +94,19 @@ function App() {
                   {items.map(item => (
                       <div className="itemCard" id={item.id}>
                           <div className="itemInfo">
-                              <h2>{item.title}</h2>
+                              <h2>{item.title} <span style={{ fontWeight: 400, color: "#757575" }}>{!item.isActive && statusFilter === null ? "(найдено)" : ""}</span></h2>
                               <p className="itemDescription">{item.description}</p>
                               <p>Нашедший: {item.foundBy.login} <span>({new Date(item.foundAt).toLocaleString()})</span></p>
                           </div>
                           {item.isOwner && (
-                              <button className="itemDeleteBtn" onClick={() => handleDeleteItem(item.id)}>
+                              <div className="controls">
+                                  <button className="itemDeleteBtn" onClick={() => handleDeleteItem(item.id)}>
                                   Удалить
-                              </button>
+                                  </button>
+                                  <button className="itemStatusToggleBtn" onClick={() => handleToggleItemStatus(item.id)}>
+                                      {item.isActive ? "Не найдена" : "Найдена"}
+                                  </button>
+                              </div>  
                           )}
                       </div>
                   ))}
