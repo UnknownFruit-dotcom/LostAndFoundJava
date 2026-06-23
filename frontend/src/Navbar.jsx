@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import defaultAvatar from './assets/defaultAvatar.png';
-import { useAuth } from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
 import { toast } from 'react-toastify';
 import './Navbar.css';
 
