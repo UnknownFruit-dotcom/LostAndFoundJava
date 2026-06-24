@@ -7,6 +7,7 @@ import com.fruit.lostandfound.security.UserPrincipal;
 import com.fruit.lostandfound.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,7 @@ public class ItemController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<ItemResponse> createItem(
             @RequestBody ItemRequest request,
             @AuthenticationPrincipal UserPrincipal currentUser) {
@@ -50,6 +52,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/{itemId}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Void> deleteItem(
             @PathVariable Long itemId,
             @AuthenticationPrincipal UserPrincipal currentUser) {
@@ -58,6 +61,7 @@ public class ItemController {
     }
 
     @PatchMapping("{itemId}/toggle")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<ItemResponse> toggleItemStatus(
             @PathVariable Long itemId,
             @AuthenticationPrincipal UserPrincipal currentUser) {

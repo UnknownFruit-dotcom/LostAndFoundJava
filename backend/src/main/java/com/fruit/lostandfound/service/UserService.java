@@ -67,7 +67,7 @@ public class UserService {
             throw new BadCredentialsException("Неверный логин или пароль");
         }
 
-        return jwtService.generateToken(login);
+        return jwtService.generateToken(user);
     }
 
     @Transactional

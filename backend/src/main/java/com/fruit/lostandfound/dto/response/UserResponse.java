@@ -6,5 +6,5 @@ import java.time.LocalDateTime;
 /**
  * DTO for {@link com.fruit.lostandfound.model.User}
  */
-public record UserResponse(Long id, String login, LocalDateTime createdAt) implements Serializable {
+public record UserResponse(Long id, String login, String role, LocalDateTime createdAt) implements Serializable {
 }

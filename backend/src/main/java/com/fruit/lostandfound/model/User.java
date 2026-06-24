@@ -28,6 +28,10 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
+
     @OneToMany(mappedBy = "foundBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Item> foundItems = new ArrayList<>();
 

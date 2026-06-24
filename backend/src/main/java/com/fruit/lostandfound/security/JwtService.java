@@ -1,15 +1,19 @@
 package com.fruit.lostandfound.security;
 
+import com.fruit.lostandfound.model.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.function.Function;
 
+@Slf4j
 @Service
 public class JwtService {
 
@@ -21,23 +25,40 @@ public class JwtService {
     }
 
     private final long JWT_EXPIRATION = 86400000;
+    private static final String ROLE_CLAIM = "role";
 
-    public String generateToken(String login) {
-        return Jwts.builder()
-                .subject(login)
+    public String generateToken(User user) {
+        String token = Jwts.builder()
+                .subject(user.getLogin())
+                .claim(ROLE_CLAIM, user.getRole().name())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
                 .signWith(getSigningKey())
                 .compact();
+
+        return token;
     }
 
-    public String extractLogin(String token) {
+    public Claims extractAllClaims(String token) {
+
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
+                .getPayload();
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get(ROLE_CLAIM, String.class));
+    }
+
+    public String extractLogin(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
     public boolean isTokenValid(String token) {

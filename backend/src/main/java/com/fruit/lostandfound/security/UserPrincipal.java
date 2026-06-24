@@ -3,6 +3,7 @@ package com.fruit.lostandfound.security;
 import com.fruit.lostandfound.model.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,16 +15,19 @@ public class UserPrincipal implements UserDetails {
     private final Long id;
     private final String login;
     private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public UserPrincipal(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
         this.password = user.getPasswordHash();
+
+        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ROLE_USER");
+        return authorities;
     }
 
     @Override
